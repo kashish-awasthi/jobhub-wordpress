@@ -1,0 +1,72 @@
+services:
+  db:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_NAME:-jobhub}
+      MYSQL_USER: ${DB_USER:-jobhub}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-jobhub_pass}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-root_pass}
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      retries: 20
+
+  wordpress:
+    image: wordpress:6-php8.2-apache
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "${WP_PORT:-8088}:80"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_NAME: ${DB_NAME:-jobhub}
+      WORDPRESS_DB_USER: ${DB_USER:-jobhub}
+      WORDPRESS_DB_PASSWORD: ${DB_PASSWORD:-jobhub_pass}
+      WORDPRESS_DEBUG: 1
+    volumes:
+      - wp_core:/var/www/html
+      - ./wp-content/themes/jobhub:/var/www/html/wp-content/themes/jobhub
+      - ./wp-content/plugins/jobhub-core:/var/www/html/wp-content/plugins/jobhub-core
+      - ./wp-content/mu-plugins:/var/www/html/wp-content/mu-plugins
+
+  wpcli:
+    image: wordpress:cli-php8.2
+    profiles: ["tools"]
+    user: "33:33"
+    depends_on:
+      - wordpress
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_NAME: ${DB_NAME:-jobhub}
+      WORDPRESS_DB_USER: ${DB_USER:-jobhub}
+      WORDPRESS_DB_PASSWORD: ${DB_PASSWORD:-jobhub_pass}
+    volumes:
+      - wp_core:/var/www/html
+      - ./wp-content/themes/jobhub:/var/www/html/wp-content/themes/jobhub
+      - ./wp-content/plugins/jobhub-core:/var/www/html/wp-content/plugins/jobhub-core
+      - ./wp-content/mu-plugins:/var/www/html/wp-content/mu-plugins
+
+  mailpit:
+    image: axllent/mailpit:latest
+    restart: unless-stopped
+    ports:
+      - "${MAIL_PORT:-8025}:8025"
+
+  phpmyadmin:
+    image: phpmyadmin:5
+    restart: unless-stopped
+    depends_on:
+      - db
+    ports:
+      - "${PMA_PORT:-8089}:80"
+    environment:
+      PMA_HOST: db
+
+volumes:
+  db_data:
+  wp_core:

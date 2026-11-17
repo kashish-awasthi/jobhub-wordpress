@@ -1,0 +1,133 @@
+/* JobHub Core components. Themes can restyle via the --jh-* variables. */
+:root {
+	--jh-primary: #0f766e;
+	--jh-primary-dark: #115e59;
+	--jh-primary-soft: #ccfbf1;
+	--jh-ink: #0f172a;
+	--jh-muted: #64748b;
+	--jh-line: #e2e8f0;
+	--jh-surface: #ffffff;
+	--jh-bg: #f8fafc;
+	--jh-accent: #f59e0b;
+	--jh-danger: #dc2626;
+	--jh-radius: 14px;
+	--jh-shadow: 0 1px 2px rgba(15, 23, 42, .05), 0 4px 16px rgba(15, 23, 42, .06);
+}
+
+.screen-reader-text { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Buttons & links */
+.jh-btn { display: inline-flex; align-items: center; justify-content: center; gap: .4em; padding: .7em 1.25em; border: 0; border-radius: 10px; background: var(--jh-primary); color: #fff !important; font: inherit; font-weight: 600; text-decoration: none; cursor: pointer; transition: background .15s, transform .15s; }
+.jh-btn:hover { background: var(--jh-primary-dark); }
+.jh-btn:active { transform: translateY(1px); }
+.jh-btn:focus-visible { outline: 3px solid var(--jh-primary-soft); outline-offset: 2px; }
+.jh-btn--ghost { background: transparent; color: var(--jh-primary) !important; box-shadow: inset 0 0 0 1.5px var(--jh-primary); }
+.jh-btn--ghost:hover { background: var(--jh-primary-soft); }
+.jh-btn--block { width: 100%; }
+.jh-link { background: none; border: 0; padding: 0; color: var(--jh-primary); font: inherit; cursor: pointer; text-decoration: underline; }
+.jh-link--danger { color: var(--jh-danger); }
+.jh-inline { display: inline; margin: 0; }
+.jh-muted { color: var(--jh-muted); margin: 0; }
+.jh-small { font-size: .85rem; }
+
+/* Cards & notices */
+.jh-card { background: var(--jh-surface); border: 1px solid var(--jh-line); border-radius: var(--jh-radius); padding: clamp(1.25rem, 3vw, 2rem); box-shadow: var(--jh-shadow); }
+.jh-card h2 { margin-top: 0; }
+.jh-notice { padding: .9rem 1.1rem; border-radius: 10px; margin: 0 0 1.25rem; font-weight: 500; }
+.jh-notice--success { background: #dcfce7; color: #166534; }
+.jh-notice--info { background: #e0f2fe; color: #075985; }
+.jh-notice--error { background: #fee2e2; color: #991b1b; }
+.jh-empty { padding: 2.5rem 1.5rem; text-align: center; color: var(--jh-muted); background: var(--jh-surface); border: 1.5px dashed var(--jh-line); border-radius: var(--jh-radius); }
+.jh-empty strong { display: block; color: var(--jh-ink); font-size: 1.1rem; margin-bottom: .25rem; }
+
+/* Forms */
+.jh-form { display: grid; gap: 1rem; }
+.jh-form label { display: grid; gap: .35rem; font-weight: 600; font-size: .92rem; color: var(--jh-ink); }
+.jh-form__row { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); align-items: end; }
+.jh-form input[type=text], .jh-form input[type=email], .jh-form input[type=url], .jh-form input[type=tel], .jh-form input[type=number], .jh-form input[type=date], .jh-form input[type=password], .jh-form input[type=file], .jh-form select, .jh-form textarea,
+.jh-auth .login-username input, .jh-auth .login-password input {
+	width: 100%; box-sizing: border-box; padding: .7em .85em; border: 1.5px solid var(--jh-line); border-radius: 10px; background: #fff; font: inherit; font-weight: 400; color: var(--jh-ink); transition: border-color .15s, box-shadow .15s;
+}
+.jh-form input:focus, .jh-form select:focus, .jh-form textarea:focus, .jh-filters input:focus, .jh-filters select:focus { outline: none; border-color: var(--jh-primary); box-shadow: 0 0 0 3px var(--jh-primary-soft); }
+.jh-check { display: inline-flex !important; grid-auto-flow: column; align-items: center; gap: .5rem !important; font-weight: 500 !important; cursor: pointer; }
+.jh-hp { position: absolute; left: -9999px; }
+.jh-auth { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.jh-auth #loginform p { margin: 0 0 1rem; }
+.jh-auth #loginform label { display: block; font-weight: 600; margin-bottom: .35rem; }
+.jh-auth #wp-submit { padding: .7em 1.25em; border: 0; border-radius: 10px; background: var(--jh-primary); color: #fff; font: inherit; font-weight: 600; cursor: pointer; }
+
+/* Filters */
+.jh-filters { display: grid; gap: .75rem; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); align-items: center; padding: 1rem; background: var(--jh-surface); border: 1px solid var(--jh-line); border-radius: var(--jh-radius); box-shadow: var(--jh-shadow); }
+.jh-filters__search { grid-column: 1 / -1; }
+.jh-filters input[type=search], .jh-filters select { width: 100%; box-sizing: border-box; padding: .7em .85em; border: 1.5px solid var(--jh-line); border-radius: 10px; background: #fff; font: inherit; color: var(--jh-ink); }
+.jh-filters input[type=search] { font-size: 1.05rem; padding: .85em 1em; }
+.jh-filters__reset { color: var(--jh-muted); font-size: .9rem; text-align: center; }
+@media (max-width: 600px) {
+	.jh-filters { grid-template-columns: 1fr 1fr; gap: .5rem; padding: .75rem; }
+	.jh-filters .jh-btn { grid-column: 1 / -1; }
+	.jh-filters select { padding: .6em .7em; font-size: .92rem; }
+}
+
+/* Job list & card */
+.jh-list { display: grid; gap: .85rem; transition: opacity .2s; }
+.jh-list.is-loading { opacity: .45; pointer-events: none; }
+.jh-job { position: relative; display: grid; grid-template-columns: auto 1fr auto; gap: 1rem; align-items: center; padding: 1.1rem 1.25rem; background: var(--jh-surface); border: 1px solid var(--jh-line); border-radius: var(--jh-radius); transition: border-color .15s, box-shadow .15s, transform .15s; }
+.jh-job:hover { border-color: var(--jh-primary); box-shadow: var(--jh-shadow); transform: translateY(-2px); }
+.jh-job--featured { border-left: 4px solid var(--jh-accent); }
+.jh-job__logo { width: 52px; height: 52px; display: grid; place-items: center; border-radius: 12px; font-weight: 700; color: hsl(var(--hue) 60% 30%); background: hsl(var(--hue) 70% 92%); }
+.jh-job__title { margin: 0 0 .15rem; font-size: 1.08rem; line-height: 1.3; }
+.jh-job__title a { color: var(--jh-ink); text-decoration: none; }
+.jh-job__title a::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+.jh-job__company { margin: 0 0 .5rem; color: var(--jh-muted); font-size: .92rem; }
+.jh-job__meta { text-align: right; display: grid; gap: .25rem; }
+.jh-job__salary { font-weight: 700; color: var(--jh-ink); white-space: nowrap; }
+.jh-job__date { font-size: .82rem; color: var(--jh-muted); white-space: nowrap; }
+.jh-tags { display: flex; flex-wrap: wrap; gap: .4rem; margin: 0; padding: 0; list-style: none; }
+.jh-tag { padding: .2em .65em; border-radius: 999px; background: var(--jh-bg); border: 1px solid var(--jh-line); font-size: .78rem; font-weight: 600; color: var(--jh-muted); }
+.jh-tag--remote { background: var(--jh-primary-soft); border-color: transparent; color: var(--jh-primary-dark); }
+.jh-tag--featured { background: #fef3c7; border-color: transparent; color: #92400e; }
+
+@media (max-width: 600px) {
+	.jh-job { grid-template-columns: auto 1fr; }
+	.jh-job__meta { grid-column: 2; text-align: left; display: flex; gap: .75rem; align-items: baseline; }
+	.jh-job__logo { width: 44px; height: 44px; }
+}
+
+/* Apply */
+.jh-apply__done { text-align: center; padding: 1rem 0; }
+.jh-apply__icon { display: inline-grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; background: #dcfce7; color: #166534; font-size: 1.6rem; font-weight: 700; }
+
+/* Dashboard */
+.jh-dash { display: grid; gap: 1.5rem; }
+.jh-dash h2 { margin: 0; }
+.jh-dash__head { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; align-items: center; }
+.jh-stats { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+.jh-stat { padding: 1.1rem 1.25rem; background: var(--jh-surface); border: 1px solid var(--jh-line); border-radius: var(--jh-radius); color: var(--jh-muted); font-size: .9rem; }
+.jh-stat__n { display: block; font-size: 2rem; font-weight: 700; color: var(--jh-ink); line-height: 1.1; }
+.jh-table-wrap { overflow-x: auto; background: var(--jh-surface); border: 1px solid var(--jh-line); border-radius: var(--jh-radius); }
+.jh-table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+.jh-table th, .jh-table td { padding: .85rem 1rem; text-align: left; border-bottom: 1px solid var(--jh-line); }
+.jh-table th { font-size: .78rem; text-transform: uppercase; letter-spacing: .04em; color: var(--jh-muted); background: var(--jh-bg); }
+.jh-table tr:last-child td { border-bottom: 0; }
+.jh-table a { color: var(--jh-ink); }
+.jh-actions { white-space: nowrap; display: flex; gap: .85rem; }
+.jh-actions a, .jh-actions .jh-link { font-size: .9rem; color: var(--jh-primary); }
+.jh-actions .jh-link--danger { color: var(--jh-danger); }
+.jh-pill { display: inline-block; padding: .2em .7em; border-radius: 999px; font-size: .78rem; font-weight: 700; background: var(--jh-bg); color: var(--jh-muted); }
+.jh-pill--publish, .jh-pill--shortlisted { background: #dcfce7; color: #166534; }
+.jh-pill--pending, .jh-pill--new { background: #e0f2fe; color: #075985; }
+.jh-pill--reviewed { background: #f1f5f9; color: #334155; }
+.jh-pill--filled, .jh-pill--expired, .jh-pill--rejected { background: #fee2e2; color: #991b1b; }
+.jh-applicants { display: grid; gap: 1rem; }
+.jh-applicant__head { display: flex; justify-content: space-between; gap: 1rem; align-items: start; }
+.jh-applicant h3 { margin: 0; }
+.jh-applicant__letter { margin: 1rem 0; color: var(--jh-ink); }
+.jh-applicant__foot { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; }
+.jh-applicant__foot select { padding: .55em .7em; border: 1.5px solid var(--jh-line); border-radius: 10px; font: inherit; }
+
+@media (max-width: 700px) {
+	.jh-table thead { display: none; }
+	.jh-table tr { display: grid; padding: .75rem 1rem; border-bottom: 1px solid var(--jh-line); }
+	.jh-table td { border: 0; padding: .2rem 0; }
+	.jh-table td[data-label]::before { content: attr(data-label) ": "; color: var(--jh-muted); font-size: .85rem; }
+}

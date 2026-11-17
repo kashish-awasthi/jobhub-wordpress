@@ -1,0 +1,19 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "jobhub/latest-jobs",
+	"title": "Latest Jobs",
+	"category": "widgets",
+	"icon": "businessman",
+	"description": "Shows the newest job listings, optionally filtered by category or featured only.",
+	"keywords": [ "jobs", "careers", "hiring" ],
+	"textdomain": "jobhub",
+	"attributes": {
+		"count": { "type": "number", "default": 4 },
+		"category": { "type": "string", "default": "" },
+		"featuredOnly": { "type": "boolean", "default": false }
+	},
+	"supports": { "html": false, "align": [ "wide", "full" ] },
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}
